@@ -1,0 +1,19 @@
+// single page apps with react router.
+// react router is a tool for navigating through a react app.
+
+// we make use of the BrowserRouter component to enable the navigation.
+// then we specify the routes and the components the routes will show when visted.
+// we make use of Link component, this will prevent the default browser reload, it makes it possible for our app to only load the html once, we can still maintain app state, and prevent page reload and redownling our html and css.
+
+// the routes are matched based on the path specified on them.
+// the BrowserRouter component will recieve the full url, then it will strip off the domain and use only the path to match routes.
+ie, www.webpage.com/page1, it will use only /page1 for matching nad not the full url.
+// when matching a route, if there are multiple matches, all components that match will be shown to the screen, to prevent use the exact prop.
+
+<BrowserRouter>
+        <div>
+          <Route path="/" component={compnent1} />
+          <Route path="/two" exact component={compnent2} />
+          <Route path="/three" exact component={compnent3} />
+        </div>
+      </BrowserRouter>

@@ -1,11 +1,13 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 // components
 const page1 = () => {
   return (
     <div>
-      <a href="http://localhost:3001/two">clickme</a>
+      <Link to="/two">clickme </Link>
+
+      <Link to="/three">clickme3</Link>
       <h1>page One</h1>
     </div>
   );
@@ -13,8 +15,16 @@ const page1 = () => {
 const page2 = () => {
   return (
     <div>
-      <a href="http://localhost:3001">clickme</a>
+      <Link to="/">clickme</Link>
       <h1>page two</h1>
+    </div>
+  );
+};
+const page3 = () => {
+  return (
+    <div>
+      <Link to="/">clickme</Link>
+      <h1>page three</h1>
     </div>
   );
 };
@@ -25,8 +35,9 @@ const App = () => {
     <div>
       <BrowserRouter>
         <div>
-          <Route path="/" exact component={page1} />
+          <Route path="/" component={page1} />
           <Route path="/two" exact component={page2} />
+          <Route path="/three" exact component={page3} />
         </div>
       </BrowserRouter>
     </div>
