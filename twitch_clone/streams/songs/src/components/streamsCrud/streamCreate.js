@@ -4,12 +4,24 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 class StreamCreate extends React.Component {
+  renderError = (formProp) => {
+    if (formProp.meta.touched) {
+      if (formProp.meta.error) {
+        return <p>{formProp.meta.error}</p>;
+      }
+      return;
+    }
+    return;
+  };
   input = (formProp) => {
     // the field component, when called passes in an object into param(props obj)
     return (
-      <div className="field">
+      <div className="field error">
         <label>{formProp.label}</label>
         <input {...formProp.input} />
+
+        {/* display error message only if user interacts with form */}
+        <div>{this.renderError(formProp)}</div>
       </div>
     );
   };
@@ -51,4 +63,4 @@ const validate = (formValues) => {
   }
   return errors;
 };
-export default reduxForm({ form: "streamCreate" })(StreamCreate);
+export default reduxForm({ form: "streamCreate", validate })(StreamCreate);
