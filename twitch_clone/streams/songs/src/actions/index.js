@@ -17,8 +17,9 @@ export const signOut = () => {
 
 // streams
 export const createStreamAction = (valueObj) => {
-  return async (dispatch) => {
-    const res = await streamCreate.post("/streams", valueObj);
+  return async (dispatch, getState) => {
+    const { userId } = await getState().authReducer;
+    const res = await streamCreate.post("/streams", { ...valueObj, userId });
 
     dispatch({
       type: "CREATE_STREAM",
@@ -27,14 +28,20 @@ export const createStreamAction = (valueObj) => {
   };
 };
 
-export const fetchStreamAction = (id = "") => {
+export const fetchStreamsAction = () => {
   let res;
   return async (dispatch) => {
-    if (id.length > 0) {
-      res = await streamCreate.get(`/streams/:${id}`);
-    } else {
-      res = await streamCreate.get("/streams");
-    }
+    res = await streamCreate.get(`/streams`);
+    dispatch({
+      type: "FETCH_STREAMS",
+      payload: res.data,
+    });
+  };
+};
+
+export const fetchStreamAction = (id) => {
+  return async (dispatch) => {
+    let res = await streamCreate.get(`/streams/:${id}`);
 
     dispatch({
       type: "FETCH_STREAM",
